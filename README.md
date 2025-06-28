@@ -2,12 +2,12 @@
 
 Port_Tariff.AI is an intelligent, AI-powered API that automates the calculation of South African port tariffs directly from unstructured vessel data. Built with FastAPI and powered by Google's Gemini Pro, it provides a seamless, accurate, and developer-friendly solution for the maritime industry.
 
-The application is containerized with Docker for easy setup and has been successfully deployed to the Railway cloud platform, making it a robust and scalable solution.
+The application is containerized with Docker for easy setup and has been successfully deployed to the Render cloud platform, making it a robust and scalable solution.
 
 https://github.com/user-attachments/assets/c9b8832a-479e-4838-8ac9-9928eb414ba7
 
-**Live API URL**: [https://porttariffai-production.up.railway.app/](https://porttariffai-production.up.railway.app/)<br>
-**Live API Docs**: [https://porttariffai-production.up.railway.app/docs](https://porttariffai-production.up.railway.app/docs)
+**Live API URL**: [https://port-tariff-ai.onrender.com/](https://port-tariff-ai.onrender.com/)<br>
+**Live API Docs**: [https://port-tariff-ai.onrender.com/docs](https://port-tariff-ai.onrender.com/docs)
 
 ---
 
@@ -16,7 +16,7 @@ https://github.com/user-attachments/assets/c9b8832a-479e-4838-8ac9-9928eb414ba7
 -   **AI-Powered Calculations**: Leverages Google Gemini to interpret unstructured vessel text and calculate tariffs based on rules extracted from the official "Port Tariff.pdf".
 -   **RESTful API**: A clean, modern API built with FastAPI.
 -   **Dockerized Environment**: Fully containerized for consistent, one-command local setup.
--   **Cloud Deployed**: Professionally deployed on Railway for public access and scalability.
+-   **Cloud Deployed**: Professionally deployed on Render for public access and scalability.
 -   **Security-First AI**: LLM responses are filtered to block harmful content if any and ensure only secure, appropriate responses.
 -   **Comprehensive Logging**: Detailed request, response, and calculation logging to `api.log`.
 -   **Automated Testing**: Comes with a `test_api.py` script to validate the deployed or local API.
@@ -201,10 +201,10 @@ Visit `http://127.0.0.1:8000/docs` to access the interactive API documentation.
 
 ## 🧪 Testing the API
 
-A test script `test_api.py` is included to verify the functionality of the API endpoints. It is pre-configured to test the live Railway deployment but can be easily switched to a local server.
+A test script `test_api.py` is included to verify the functionality of the API endpoints. It is pre-configured to test the live Render deployment but can be easily switched to a local server.
 
 1.  **Ensure the server is running** (either via Docker or locally).
-2.  **To test the live Railway API**, simply run:
+2.  **To test the live Render API**, simply run:
     ```bash
     python test_api.py
     ```
@@ -217,7 +217,7 @@ A test script `test_api.py` is included to verify the functionality of the API e
 The API is documented using OpenAPI (Swagger UI), which provides an interactive way to explore and test the endpoints.
 
 **API Docs URL**:
--   **Live**: [https://porttariffai-production.up.railway.app/docs](https://porttariffai-production.up.railway.app/docs)
+-   **Live**: [https://port-tariff-ai.onrender.com/docs](https://port-tariff-ai.onrender.com/docs)
 -   **Local**: [http://localhost:8000/docs](http://localhost:8000/docs)
 
 ⚠️ **Note**: Due to AI model variability, the API may occasionally return incomplete results - simply retry the request if this occurs.
@@ -259,7 +259,7 @@ The API is documented using OpenAPI (Swagger UI), which provides an interactive 
 
 This command can be run from any terminal (Git Bash, macOS, Linux).
 ```bash
-curl -X POST "https://porttariffai-production.up.railway.app/calculate-tariffs" \
+curl -X POST "https://port-tariff-ai.onrender.com/calculate-tariffs" \
 -H "Content-Type: application/json" \
 -d '{
   "vessel_info": "Port: Durban\nVessel Name: SUDESTADA\nGT: 51,300\nDays Alongside: 3.39\nActivity: Exporting Iron Ore",
@@ -270,7 +270,7 @@ curl -X POST "https://porttariffai-production.up.railway.app/calculate-tariffs" 
 #### Windows Command Prompt
 
 ```cmd
-curl -X POST "https://porttariffai-production.up.railway.app/calculate-tariffs" -H "Content-Type: application/json" -d "{\"vessel_info\": \"Port: Durban\\nVessel Name: SUDESTADA\\nGT: 51,300\\nDays Alongside: 3.39\\nActivity: Exporting Iron Ore\", \"requested_dues\": [\"Light Dues\", \"VTS Dues\", \"Running of Vessel Dues\"]}"
+curl -X POST "https://port-tariff-ai.onrender.com/calculate-tariffs" -H "Content-Type: application/json" -d "{\"vessel_info\": \"Port: Durban\\nVessel Name: SUDESTADA\\nGT: 51,300\\nDays Alongside: 3.39\\nActivity: Exporting Iron Ore\", \"requested_dues\": [\"Light Dues\", \"VTS Dues\", \"Running of Vessel Dues\"]}"
 ```
 
 #### PowerShell
@@ -288,7 +288,7 @@ Activity: Exporting Iron Ore
     requested_dues = @("Light Dues", "VTS Dues", "Running of Vessel Dues")
 } | ConvertTo-Json
 
-Invoke-RestMethod -Uri "https://porttariffai-production.up.railway.app/calculate-tariffs" -Method POST -Headers $headers -Body $body
+Invoke-RestMethod -Uri "https://port-tariff-ai.onrender.com/calculate-tariffs" -Method POST -Headers $headers -Body $body
 ```
 
 #### Comprehensive Example with Full Vessel Details
@@ -297,7 +297,7 @@ For more accurate calculations, you can provide comprehensive vessel information
 
 ##### Mac/Linux (cURL)
 ```bash
-curl -X POST "https://porttariffai-production.up.railway.app/calculate-tariffs" \
+curl -X POST "https://port-tariff-ai.onrender.com/calculate-tariffs" \
 -H "Content-Type: application/json" \
 -d '{
   "vessel_info": "Port: Durban\n\nVessel Details:\n\nGeneral\n\nVessel Name: SUDESTADA\nBuilt: 2010\nFlag: MLT - Malta\nClassification Society: Registro Italiano Navale\nCall Sign: [Not provided]\n\nMain Details\n\nLloyds / IMO No.: [Not provided]\nType: Bulk Carrier\nDWT: 93,274\nGT / NT: 51,300 / 31,192\nLOA (m): 229.2\nBeam (m): 38\nMoulded Depth (m): 20.7\nLBP: 222\nDrafts SW S / W / T (m): 14.9 / 0 / 0\nSuez GT / NT: - / 49,069\n\nCommunication\n\nE-mail: [Not provided]\nCommercial E-mail: [Not provided]\n\nDRY\n\nNumber of Holds: 7\n\nCargo Details\n\nCargo Quantity: 40,000 MT\nDays Alongside: 3.39 days\nArrival Time: 15 Nov 2024 10:12\nDeparture Time: 22 Nov 2024 13:00\n\nActivity/Operations\n\nActivity: Exporting Iron Ore\nNumber of Operations: 2",
@@ -307,7 +307,7 @@ curl -X POST "https://porttariffai-production.up.railway.app/calculate-tariffs" 
 
 ##### Windows Command Prompt
 ```cmd
-curl -X POST "https://porttariffai-production.up.railway.app/calculate-tariffs" -H "Content-Type: application/json" -d "{\"vessel_info\": \"Port: Durban\\n\\nVessel Details:\\n\\nGeneral\\n\\nVessel Name: SUDESTADA\\nBuilt: 2010\\nFlag: MLT - Malta\\nClassification Society: Registro Italiano Navale\\nCall Sign: [Not provided]\\n\\nMain Details\\n\\nLloyds / IMO No.: [Not provided]\\nType: Bulk Carrier\\nDWT: 93,274\\nGT / NT: 51,300 / 31,192\\nLOA (m): 229.2\\nBeam (m): 38\\nMoulded Depth (m): 20.7\\nLBP: 222\\nDrafts SW S / W / T (m): 14.9 / 0 / 0\\nSuez GT / NT: - / 49,069\\n\\nCommunication\\n\\nE-mail: [Not provided]\\nCommercial E-mail: [Not provided]\\n\\nDRY\\n\\nNumber of Holds: 7\\n\\nCargo Details\\n\\nCargo Quantity: 40,000 MT\\nDays Alongside: 3.39 days\\nArrival Time: 15 Nov 2024 10:12\\nDeparture Time: 22 Nov 2024 13:00\\n\\nActivity/Operations\\n\\nActivity: Exporting Iron Ore\\nNumber of Operations: 2\", \"requested_dues\": [\"Port Dues\", \"Light Dues\", \"VTS Dues\"]}"
+curl -X POST "https://port-tariff-ai.onrender.com/calculate-tariffs" -H "Content-Type: application/json" -d "{\"vessel_info\": \"Port: Durban\\n\\nVessel Details:\\n\\nGeneral\\n\\nVessel Name: SUDESTADA\\nBuilt: 2010\\nFlag: MLT - Malta\\nClassification Society: Registro Italiano Navale\\nCall Sign: [Not provided]\\n\\nMain Details\\n\\nLloyds / IMO No.: [Not provided]\\nType: Bulk Carrier\\nDWT: 93,274\\nGT / NT: 51,300 / 31,192\\nLOA (m): 229.2\\nBeam (m): 38\\nMoulded Depth (m): 20.7\\nLBP: 222\\nDrafts SW S / W / T (m): 14.9 / 0 / 0\\nSuez GT / NT: - / 49,069\\n\\nCommunication\\n\\nE-mail: [Not provided]\\nCommercial E-mail: [Not provided]\\n\\nDRY\\n\\nNumber of Holds: 7\\n\\nCargo Details\\n\\nCargo Quantity: 40,000 MT\\nDays Alongside: 3.39 days\\nArrival Time: 15 Nov 2024 10:12\\nDeparture Time: 22 Nov 2024 13:00\\n\\nActivity/Operations\\n\\nActivity: Exporting Iron Ore\\nNumber of Operations: 2\", \"requested_dues\": [\"Port Dues\", \"Light Dues\", \"VTS Dues\"]}"
 ```
 
 
@@ -326,14 +326,14 @@ curl -X POST "https://porttariffai-production.up.railway.app/calculate-tariffs" 
 
 ## ☁️ Deployment
 
-This application is deployed on **Railway** using its Docker container runtime. The deployment is automatically triggered by pushes to the `master` branch of the source GitHub repository.
+This application is deployed on **Render** using its Docker container runtime. The deployment is automatically triggered by pushes to the `master` branch of the source GitHub repository.
 
--   **Platform**: Railway
+-   **Platform**: Render
 -   **Service Type**: Web Service
 -   **Runtime**: Docker
--   **Live URL**: [https://porttariffai-production.up.railway.app](https://porttariffai-production.up.railway.app)
+-   **Live URL**: [https://port-tariff-ai.onrender.com](https://port-tariff-ai.onrender.com)
 
-**⚠️ Performance Note**: The live API is deployed on Railway's free tier. Due to this, the service may experience cold starts and can take up to 1 minute to respond on the first request after periods of inactivity. Use the **local deployment** if needed. 
+**⚠️ Performance Note**: The live API is deployed on Render's free tier. Due to this, the service may experience cold starts and can take up to 1 minute to respond on the first request after periods of inactivity. Use the **local deployment** if needed. 
 
 
 ---
