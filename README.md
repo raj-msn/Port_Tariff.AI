@@ -220,7 +220,12 @@ The API is documented using OpenAPI (Swagger UI), which provides an interactive 
 -   **Live**: [https://port-tariff-ai.onrender.com/docs](https://port-tariff-ai.onrender.com/docs)
 -   **Local**: [http://localhost:8000/docs](http://localhost:8000/docs)
 
-⚠️ **Note**: Due to AI model variability, the API may occasionally return incomplete results - simply retry the request if this occurs.
+⚠️ **Note**:
+- Due to AI model variability, the API may 
+occasionally return incomplete results - simply retry the 
+request if this occurs.
+
+- Provide complete vessel details in the payload (GT, LOA, port, days alongside, etc.) - missing information will be assumed from default values in the rule book, which may not reflect your specific vessel.
 
 ### Endpoints
 
