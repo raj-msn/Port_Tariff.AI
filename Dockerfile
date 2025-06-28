@@ -26,7 +26,7 @@ COPY api.py .
 COPY main.py .
 COPY tariff_engine/ ./tariff_engine/
 COPY ["Port Tariff.pdf", "./"]
-COPY rubrics.md .
+COPY README.md .
 
 
 # Create directories for logs and generated files
