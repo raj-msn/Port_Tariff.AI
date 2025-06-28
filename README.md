@@ -4,6 +4,8 @@ Port_Tariff.AI is an intelligent, AI-powered API that automates the calculation 
 
 The application is containerized with Docker for easy setup and has been successfully deployed to the Render cloud platform, making it a robust and scalable solution.
 
+https://github.com/user-attachments/assets/7ed8cf39-2ee8-4e10-8d5e-a8c779270e59
+
 **Live API URL**: [https://port-tariff-ai.onrender.com/](https://port-tariff-ai.onrender.com/)<br>
 **Live API Docs**: [https://port-tariff-ai.onrender.com/docs](https://port-tariff-ai.onrender.com/docs)
 
@@ -18,6 +20,37 @@ The application is containerized with Docker for easy setup and has been success
 -   **Comprehensive Logging**: Detailed request, response, and calculation logging to `api.log`.
 -   **Automated Testing**: Comes with a `test_api.py` script to validate the deployed or local API.
 -   **Modular Architecture**: Core logic is cleanly separated into the `tariff_engine` for maintainability.
+-   **Modular Design**: Core logic is neatly separated into the `tariff_engine` package.
+-   **Dual Interface**: Supports both a modern REST API and a legacy CLI (`main.py`).
+
+---
+
+## Interactive CLI Chatbot
+
+For local development and quick testing, the project includes an interactive CLI chatbot. You can use it to directly interact with the calculation engine without going through the API.
+
+*(A video demonstration of the CLI in action can be found at the top of this README.)*
+
+### How to Use
+
+1.  **Start the chatbot:**
+    ```bash
+    python main.py
+    ```
+
+2.  Use the `input` command to provide the vessel data. Paste your text, then press `Ctrl+Z` (on Windows) or `Ctrl+D` (on macOS/Linux) and then Enter to submit.
+
+3.  Use the `calculate` command to get the tariffs.
+
+### Available Commands
+
+-   `input`: To enter multi-line vessel data.
+-   `calculate all`: Calculates all six supported tariff types.
+-   `calculate [due names]`: Calculates specific dues (e.g., `calculate port dues, light dues`).
+-   `available dues`: Lists all supported tariff types.
+-   `debug on` / `off`: Toggles debug mode to show detailed steps from the model.
+-   `help`: Shows this list of commands.
+-   `quit`: Exits the chatbot.
 
 ---
 
