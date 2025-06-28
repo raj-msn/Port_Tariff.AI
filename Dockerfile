@@ -26,6 +26,8 @@ COPY api.py .
 COPY main.py .
 COPY tariff_engine/ ./tariff_engine/
 COPY ["Port Tariff.pdf", "./"]
+COPY rubrics.md .
+
 
 # Create directories for logs and generated files
 RUN mkdir -p /app/logs
