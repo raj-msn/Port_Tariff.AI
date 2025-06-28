@@ -220,6 +220,8 @@ The API is documented using OpenAPI (Swagger UI), which provides an interactive 
 -   **Live**: [https://porttariffai-production.up.railway.app/docs](https://porttariffai-production.up.railway.app/docs)
 -   **Local**: [http://localhost:8000/docs](http://localhost:8000/docs)
 
+⚠️ **Note**: Due to AI model variability, the API may occasionally return incomplete results - simply retry the request if this occurs.
+
 ### Endpoints
 
 #### 1. Health Check
@@ -287,6 +289,37 @@ Activity: Exporting Iron Ore
 } | ConvertTo-Json
 
 Invoke-RestMethod -Uri "https://porttariffai-production.up.railway.app/calculate-tariffs" -Method POST -Headers $headers -Body $body
+```
+
+#### Comprehensive Example with Full Vessel Details
+
+For more accurate calculations, you can provide comprehensive vessel information:
+
+##### Mac/Linux (cURL)
+```bash
+curl -X POST "https://porttariffai-production.up.railway.app/calculate-tariffs" \
+-H "Content-Type: application/json" \
+-d '{
+  "vessel_info": "Port: Durban\n\nVessel Details:\n\nGeneral\n\nVessel Name: SUDESTADA\nBuilt: 2010\nFlag: MLT - Malta\nClassification Society: Registro Italiano Navale\nCall Sign: [Not provided]\n\nMain Details\n\nLloyds / IMO No.: [Not provided]\nType: Bulk Carrier\nDWT: 93,274\nGT / NT: 51,300 / 31,192\nLOA (m): 229.2\nBeam (m): 38\nMoulded Depth (m): 20.7\nLBP: 222\nDrafts SW S / W / T (m): 14.9 / 0 / 0\nSuez GT / NT: - / 49,069\n\nCommunication\n\nE-mail: [Not provided]\nCommercial E-mail: [Not provided]\n\nDRY\n\nNumber of Holds: 7\n\nCargo Details\n\nCargo Quantity: 40,000 MT\nDays Alongside: 3.39 days\nArrival Time: 15 Nov 2024 10:12\nDeparture Time: 22 Nov 2024 13:00\n\nActivity/Operations\n\nActivity: Exporting Iron Ore\nNumber of Operations: 2",
+  "requested_dues": ["Port Dues", "Light Dues", "VTS Dues"]
+}'
+```
+
+##### Windows Command Prompt
+```cmd
+curl -X POST "https://porttariffai-production.up.railway.app/calculate-tariffs" -H "Content-Type: application/json" -d "{\"vessel_info\": \"Port: Durban\\n\\nVessel Details:\\n\\nGeneral\\n\\nVessel Name: SUDESTADA\\nBuilt: 2010\\nFlag: MLT - Malta\\nClassification Society: Registro Italiano Navale\\nCall Sign: [Not provided]\\n\\nMain Details\\n\\nLloyds / IMO No.: [Not provided]\\nType: Bulk Carrier\\nDWT: 93,274\\nGT / NT: 51,300 / 31,192\\nLOA (m): 229.2\\nBeam (m): 38\\nMoulded Depth (m): 20.7\\nLBP: 222\\nDrafts SW S / W / T (m): 14.9 / 0 / 0\\nSuez GT / NT: - / 49,069\\n\\nCommunication\\n\\nE-mail: [Not provided]\\nCommercial E-mail: [Not provided]\\n\\nDRY\\n\\nNumber of Holds: 7\\n\\nCargo Details\\n\\nCargo Quantity: 40,000 MT\\nDays Alongside: 3.39 days\\nArrival Time: 15 Nov 2024 10:12\\nDeparture Time: 22 Nov 2024 13:00\\n\\nActivity/Operations\\n\\nActivity: Exporting Iron Ore\\nNumber of Operations: 2\", \"requested_dues\": [\"Port Dues\", \"Light Dues\", \"VTS Dues\"]}"
+```
+
+
+**Expected Response:**
+```json
+{
+  "results": {
+    "Port Dues": "ZAR 199,371.35",
+    "Light Dues": "ZAR 60,062.04",
+    "VTS Dues": "ZAR 33,345.00"
+  }
+}
 ```
 
 ---
