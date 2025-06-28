@@ -257,4 +257,4 @@ curl -X POST "http://127.0.0.1:8000/calculate-tariffs" \
 }
 ```
 
-The API internally re-uses the same logic as the CLI (`python main.py`), ensuring consistency. 
+The API internally re-uses the same logic as the CLI (`python main.py`), ensuring consistency.
