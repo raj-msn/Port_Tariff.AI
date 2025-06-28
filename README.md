@@ -1,6 +1,6 @@
-# PortTariff.AI: South-African Port Tariff Calculator
+# Port_Tariff.AI: South-African Port Tariff Calculator
 
-PortTariff.AI is an intelligent, AI-powered API that automates the calculation of South African port tariffs directly from unstructured vessel data. Built with FastAPI and powered by Google's Gemini Pro, it provides a seamless, accurate, and developer-friendly solution for the maritime industry.
+Port_Tariff.AI is an intelligent, AI-powered API that automates the calculation of South African port tariffs directly from unstructured vessel data. Built with FastAPI and powered by Google's Gemini Pro, it provides a seamless, accurate, and developer-friendly solution for the maritime industry.
 
 The application is containerized with Docker for easy setup and has been successfully deployed to the Render cloud platform, making it a robust and scalable solution.
 
@@ -35,8 +35,8 @@ This is the fastest and most reliable way to run the application, as it mirrors 
 **Steps**:
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/raj-msn/PortTariff.AI.git
-    cd PortTariff.AI
+    git clone https://github.com/raj-msn/Port_Tariff.AI.git
+    cd Port_Tariff.AI
     ```
 2.  **Create your environment file:**
     Copy the example `.env` file and add your Gemini API key.
@@ -173,7 +173,7 @@ This application is deployed on **Render** using its Docker container runtime. T
 -   **Platform**: Render
 -   **Service Type**: Web Service
 -   **Runtime**: Docker
--   **GitHub Repo**: [raj-msn/PortTariff.AI](https://github.com/raj-msn/PortTariff.AI)
+-   **GitHub Repo**: [raj-msn/Port_Tariff.AI](https://github.com/raj-msn/Port_Tariff.AI)
 
 The deployment process uses the `Dockerfile` in the root of the repository to build and run the container. The `GEMINI_API_KEY` is securely configured as an environment variable in the Render dashboard.
 
