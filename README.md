@@ -4,8 +4,6 @@ Port_Tariff.AI is an intelligent, AI-powered API that automates the calculation 
 
 The application is containerized with Docker for easy setup and has been successfully deployed to the Render cloud platform, making it a robust and scalable solution.
 
-https://github.com/user-attachments/assets/512ee13e-1a2a-4936-83a7-909fa28f7258
-
 https://github.com/user-attachments/assets/c9b8832a-479e-4838-8ac9-9928eb414ba7
 
 **Live API URL**: [https://porttariffai-production.up.railway.app/](https://porttariffai-production.up.railway.app/)<br>
@@ -31,7 +29,7 @@ https://github.com/user-attachments/assets/c9b8832a-479e-4838-8ac9-9928eb414ba7
 
 For local development and quick testing, the project includes an interactive CLI chatbot. You can use it to directly interact with the calculation engine without going through the API.
 
-*(A video demonstration of the CLI in action can be found at the top of this README.)*
+https://github.com/user-attachments/assets/512ee13e-1a2a-4936-83a7-909fa28f7258
 
 ### How to Use
 
