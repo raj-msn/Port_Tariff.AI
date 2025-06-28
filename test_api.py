@@ -2,7 +2,8 @@ import requests
 import json
 
 # API endpoint
-BASE_URL = "https://port-tariff-ai.onrender.com"
+# BASE_URL = "https://port-tariff-ai.onrender.com"
+BASE_URL = "http://localhost:8000"
 
 # Test vessel data for SUDESTADA at Port of Durban
 vessel_info = """Port: Durban
