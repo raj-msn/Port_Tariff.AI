@@ -1,100 +1,196 @@
-# Port Tariff Calculator API
+# PortTariff.AI: South-African Port Tariff Calculator
 
-This project provides a robust API to automatically calculate South African port tariffs from unstructured vessel data. It is built with FastAPI, containerized with Docker, and uses a Gemini-powered core engine for the calculations.
+PortTariff.AI is an intelligent, AI-powered API that automates the calculation of South African port tariffs directly from unstructured vessel data. Built with FastAPI and powered by Google's Gemini Pro, it provides a seamless, accurate, and developer-friendly solution for the maritime industry.
 
-## Key Features
+The application is containerized with Docker for easy setup and has been successfully deployed to the Render cloud platform, making it a robust and scalable solution.
 
--   **Simple API**: A single, powerful `POST /calculate-tariffs` endpoint.
--   **Dockerized**: Run the entire application with a single `docker-compose` command.
--   **Automated Testing**: Includes a `test_api.py` script to validate the API.
--   **Modular Design**: Core logic is neatly separated into the `tariff_engine` package.
--   **Dual Interface**: Supports both a modern REST API and a legacy CLI (`main.py`).
+**Live API URL**: [https://port-tariff-ai.onrender.com/](https://port-tariff-ai.onrender.com/)<br>
+**Live API Docs**: [https://port-tariff-ai.onrender.com/docs](https://port-tariff-ai.onrender.com/docs)
 
 ---
 
-## 🚀 How to Run (Docker - Recommended)
+## 🌟 Key Features
 
-This is the fastest and most reliable way to get started.
-
-**Prerequisites:**
--   Docker & Docker Compose
--   A configured `.env` file (see **Configuration** below).
-
-**Command:**
-```bash
-docker-compose up --build
-```
-The API will be running at `http://127.0.0.1:8000`. You can access the interactive OpenAPI docs at `http://127.0.0.1:8000/docs`.
+-   **AI-Powered Calculations**: Leverages Google Gemini to interpret unstructured vessel text and calculate tariffs based on rules extracted from the official "Port Tariff.pdf".
+-   **RESTful API**: A clean, modern API built with FastAPI.
+-   **Dockerized Environment**: Fully containerized for consistent, one-command local setup.
+-   **Cloud Deployed**: Professionally deployed on Render for public access and scalability.
+-   **Comprehensive Logging**: Detailed request, response, and calculation logging to `api.log`.
+-   **Automated Testing**: Comes with a `test_api.py` script to validate the deployed or local API.
+-   **Modular Architecture**: Core logic is cleanly separated into the `tariff_engine` for maintainability.
 
 ---
 
-## 🛠️ Local Development Setup
+## 🚀 Getting Started: Local Setup
 
-**1. Configuration:**
-   Create a `.env` file from the example and add your Gemini API key.
-   ```bash
-   cp .env.example .env
-   # Now, edit .env to add your key
-   ```
+You can run the application locally using either Docker (recommended) or a standard Python environment.
 
-**2. Install Dependencies:**
-   ```bash
-   pip install -r requirements.txt
-   ```
+### Option 1: Docker (Recommended)
 
-**3. Run the Server:**
-   ```bash
-   uvicorn api:app --reload
-   ```
+This is the fastest and most reliable way to run the application, as it mirrors the production environment.
+
+**Prerequisites**:
+-   Docker & Docker Compose installed.
+
+**Steps**:
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/raj-msn/PortTariff.AI.git
+    cd PortTariff.AI
+    ```
+2.  **Create your environment file:**
+    Copy the example `.env` file and add your Gemini API key.
+    ```bash
+    cp .env.example .env
+    # Now, edit the .env file and paste your API key
+    ```
+3.  **Build and run with Docker Compose:**
+    ```bash
+    docker-compose up --build
+    ```
+    The application will now be running at `http://127.0.0.1:8000`.
+
+### Option 2: Python Virtual Environment
+
+**Prerequisites**:
+- Python 3.11+
+
+**Steps**:
+1. **Clone and set up the environment file** as described in the Docker steps.
+2. **Create and activate a virtual environment:**
+    ```bash
+    python -m venv venv
+    source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
+    ```
+3. **Install dependencies:**
+    ```bash
+    pip install -r requirements.txt
+    ```
+4. **Run the FastAPI server:**
+    ```bash
+    uvicorn api:app --reload
+    ```
+    The application will now be running at `http://127.0.0.1:8000`.
 
 ---
 
 ## 🧪 Testing the API
 
-Ensure the API server is running (either via Docker or locally). Then, run the test script:
-```bash
-python test_api.py
-```
-This script validates the health check and calculation endpoints.
+A test script `test_api.py` is included to verify the functionality of the API endpoints. It is pre-configured to test the live Render deployment but can be easily switched to a local server.
+
+1.  **Ensure the server is running** (either via Docker or locally).
+2.  **To test the live Render API**, simply run:
+    ```bash
+    python test_api.py
+    ```
+3.  **To test your local server**, open `test_api.py` and change the `BASE_URL` to `http://localhost:8000`.
 
 ---
 
-## API Usage Example
+## 🛰️ API Documentation & Usage
 
-Send a `POST` request to `/calculate-tariffs` with the vessel data.
+The API is documented using OpenAPI (Swagger UI), which provides an interactive way to explore and test the endpoints.
 
-**`curl` Command:**
+**API Docs URL**:
+-   **Live**: [https://port-tariff-ai.onrender.com/docs](https://port-tariff-ai.onrender.com/docs)
+-   **Local**: [http://localhost:8000/docs](http://localhost:8000/docs)
+
+### Endpoints
+
+#### 1. Health Check
+
+-   **Endpoint**: `GET /`
+-   **Description**: Checks if the API is running and available.
+-   **Success Response** (`200 OK`):
+    ```json
+    {
+      "status": "ok"
+    }
+    ```
+
+#### 2. Calculate Tariffs
+
+-   **Endpoint**: `POST /calculate-tariffs`
+-   **Description**: Calculates port tariffs from unstructured vessel data.
+-   **Request Body**:
+    -   `vessel_info` (string): A multi-line string containing all the vessel details.
+    -   `requested_dues` (list[string], optional): A list of specific dues to calculate. If `null` or omitted, all available tariffs will be calculated.
+-   **Success Response** (`200 OK`):
+    ```json
+    {
+      "results": {
+        "Port Dues": "ZAR 199,371.35",
+        "Light Dues": "ZAR 60,062.04",
+        "VTS Dues": "ZAR 33,345.00"
+      }
+    }
+    ```
+
+### Example API Requests
+
+#### cURL (Command Line)
+
+This command can be run from any terminal (Git Bash, macOS, Linux).
 ```bash
-curl -X POST "http://127.0.0.1:8000/calculate-tariffs" \
-  -H "Content-Type: application/json" \
-  -d '{
-        "vessel_info": "Vessel Name: SUDESTADA\nGT: 51300\nLOA: 229.2\nDays Alongside: 3.39\nPort: Durban",
-        "requested_dues": ["Port Dues", "Light Dues"]
-      }'
+curl -X POST "https://port-tariff-ai.onrender.com/calculate-tariffs" \
+-H "Content-Type: application/json" \
+-d '{
+  "vessel_info": "Port: Durban\nVessel Name: SUDESTADA\nGT: 51,300\nDays Alongside: 3.39\nActivity: Exporting Iron Ore",
+  "requested_dues": ["Port Dues", "Light Dues", "VTS Dues"]
+}'
 ```
 
-**Success Response:**
-```json
-{
-  "results": {
-    "Port Dues": "ZAR 199,371.35",
-    "Light Dues": "ZAR 60,062.04"
-  }
-}
+#### Windows Command Prompt
+
+```cmd
+curl -X POST "https://port-tariff-ai.onrender.com/calculate-tariffs" -H "Content-Type: application/json" -d "{\"vessel_info\": \"Port: Durban\\nVessel Name: SUDESTADA\\nGT: 51,300\\nDays Alongside: 3.39\\nActivity: Exporting Iron Ore\", \"requested_dues\": [\"Port Dues\", \"Light Dues\", \"VTS Dues\"]}"
+```
+
+#### PowerShell
+
+```powershell
+$headers = @{ "Content-Type" = "application/json" }
+$body = @{
+    vessel_info = @"
+Port: Durban
+Vessel Name: SUDESTADA
+GT: 51,300
+Days Alongside: 3.39
+Activity: Exporting Iron Ore
+"@
+    requested_dues = @("Port Dues", "Light Dues", "VTS Dues")
+} | ConvertTo-Json
+
+Invoke-RestMethod -Uri "https://port-tariff-ai.onrender.com/calculate-tariffs" -Method POST -Headers $headers -Body $body
 ```
 
 ---
 
-## Project Structure Overview
+## ☁️ Deployment
 
--   `api.py`: FastAPI application, routes, and main logic.
--   `tariff_engine/`: Core package for the calculation engine (`chatbot.py`).
--   `main.py`: Legacy command-line interface.
--   `test_api.py`: API functional test script.
--   `Dockerfile` / `docker-compose.yml`: Docker configuration.
--   `Port Tariff.pdf`: The source document for tariff rules.
--   `requirements.txt`: Python dependencies.
--   `.env.example`: Template for environment variables.
+This application is deployed on **Render** using its Docker container runtime. The deployment is automatically triggered by pushes to the `master` branch of the source GitHub repository.
+
+-   **Platform**: Render
+-   **Service Type**: Web Service
+-   **Runtime**: Docker
+-   **GitHub Repo**: [raj-msn/PortTariff.AI](https://github.com/raj-msn/PortTariff.AI)
+
+The deployment process uses the `Dockerfile` in the root of the repository to build and run the container. The `GEMINI_API_KEY` is securely configured as an environment variable in the Render dashboard.
+
+---
+
+## 🏗️ Project Architecture
+
+-   `api.py`: The main FastAPI application file. It defines endpoints, handles requests, and coordinates with the tariff engine.
+-   `tariff_engine/`: The core logic package.
+    -   `chatbot.py`: Contains the `PortDuesChatbot` class, which interacts with the Gemini API. It manages the rules extracted from the PDF and performs the calculations.
+    -   `prompts.py`: Stores the prompt templates sent to the Gemini model for rule extraction and calculation.
+    -   `constants.py`: Defines a list of all calculable `DUES_TYPES`.
+-   `main.py`: A legacy entry point for a command-line chat interface (not used by the API).
+-   `Dockerfile`: Defines the Docker image, installing dependencies and copying all necessary files.
+-   `docker-compose.yml`: Orchestrates the local Docker setup, including port mapping and environment variable injection.
+-   `Port Tariff.pdf`: The source document containing all the tariff rules and regulations.
+-   `rubrics.md`: A markdown file where the AI's extracted rules from the PDF are stored (this file is generated on first run if it doesn't exist).
 
 ## Logging
 
