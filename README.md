@@ -6,8 +6,10 @@ The application is containerized with Docker for easy setup and has been success
 
 https://github.com/user-attachments/assets/512ee13e-1a2a-4936-83a7-909fa28f7258
 
-**Live API URL**: [https://port-tariff-ai.onrender.com/](https://port-tariff-ai.onrender.com/)<br>
-**Live API Docs**: [https://port-tariff-ai.onrender.com/docs](https://port-tariff-ai.onrender.com/docs)
+https://github.com/user-attachments/assets/c9b8832a-479e-4838-8ac9-9928eb414ba7
+
+**Live API URL**: [https://porttariffai-production.up.railway.app/](https://porttariffai-production.up.railway.app/)<br>
+**Live API Docs**: [https://porttariffai-production.up.railway.app/docs](https://porttariffai-production.up.railway.app/docs)
 
 ---
 
@@ -63,56 +65,148 @@ You can run the application locally using either Docker (recommended) or a stand
 This is the fastest and most reliable way to run the application, as it mirrors the production environment.
 
 **Prerequisites**:
--   Docker & Docker Compose installed.
+- Docker & Docker Compose installed ([Download Docker Desktop](https://www.docker.com/products/docker-desktop/))
+- Git installed
+
+#### For Mac/Linux Users:
 
 **Steps**:
-1.  **Clone the repository:**
+1. **Clone the repository:**
     ```bash
     git clone https://github.com/raj-msn/Port_Tariff.AI.git
     cd Port_Tariff.AI
     ```
-2.  **Create your environment file:**
-    Copy the example `.env` file and add your Gemini API key.
+
+2. **Create your environment file:**
     ```bash
     cp .env.example .env
-    # Now, edit the .env file and paste your API key
+    # Edit the .env file and add your GEMINI_API_KEY
+    nano .env  # or use your preferred editor
     ```
-3.  **Build and run with Docker Compose:**
+
+3. **Build and run with Docker Compose:**
     ```bash
     docker-compose up --build
     ```
-    The application will now be running at `http://127.0.0.1:8000`.
+
+#### For Windows Users:
+
+**Steps**:
+1. **Clone the repository:**
+    ```cmd
+    git clone https://github.com/raj-msn/Port_Tariff.AI.git
+    cd Port_Tariff.AI
+    ```
+
+2. **Create your environment file:**
+    ```cmd
+    copy .env.example .env
+    # Edit the .env file and add your GEMINI_API_KEY using Notepad
+    notepad .env
+    ```
+
+3. **Build and run with Docker Compose:**
+    ```cmd
+    docker-compose up --build
+    ```
+
+#### ✅ Verify Docker Installation
+
+After running the command, you should see output ending with:
+```
+northstar-web-1  | INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+```
+
+The application will now be running at `http://127.0.0.1:8000`.
 
 ### Option 2: Python Virtual Environment
 
 **Prerequisites**:
-- Python 3.11+
+- Python 3.10+ installed on your system
+- Git installed
+
+#### For Mac/Linux Users:
 
 **Steps**:
-1. **Clone and set up the environment file** as described in the Docker steps.
+1. **Clone the repository:**
+    ```bash
+    git clone https://github.com/raj-msn/Port_Tariff.AI.git
+    cd Port_Tariff.AI
+    ```
+
 2. **Create and activate a virtual environment:**
     ```bash
-    python -m venv venv
-    source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
+    python3 -m venv venv
+    source venv/bin/activate
     ```
+
 3. **Install dependencies:**
     ```bash
     pip install -r requirements.txt
     ```
-4. **Run the FastAPI server:**
+
+4. **Configure environment variables:**
+    ```bash
+    cp .env.example .env
+    # Edit .env file and add your GEMINI_API_KEY
+    nano .env  # or use your preferred editor (vim, code, etc.)
+    ```
+
+5. **Run the FastAPI server:**
     ```bash
     uvicorn api:app --reload
     ```
-    The application will now be running at `http://127.0.0.1:8000`.
+
+#### For Windows Users:
+
+**Steps**:
+1. **Clone the repository:**
+    ```cmd
+    git clone https://github.com/raj-msn/Port_Tariff.AI.git
+    cd Port_Tariff.AI
+    ```
+
+2. **Create and activate a virtual environment:**
+    ```cmd
+    python -m venv venv
+    venv\Scripts\activate
+    ```
+
+3. **Install dependencies:**
+    ```cmd
+    pip install -r requirements.txt
+    ```
+
+4. **Configure environment variables:**
+    ```cmd
+    copy .env.example .env
+    # Edit .env file and add your GEMINI_API_KEY using Notepad or any text editor
+    notepad .env
+    ```
+
+5. **Run the FastAPI server:**
+    ```cmd
+    uvicorn api:app --reload
+    ```
+
+#### ✅ Verify Installation
+
+After running the server, you should see output similar to:
+```
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process
+```
+
+Visit `http://127.0.0.1:8000/docs` to access the interactive API documentation.
 
 ---
 
 ## 🧪 Testing the API
 
-A test script `test_api.py` is included to verify the functionality of the API endpoints. It is pre-configured to test the live Render deployment but can be easily switched to a local server.
+A test script `test_api.py` is included to verify the functionality of the API endpoints. It is pre-configured to test the live Railway deployment but can be easily switched to a local server.
 
 1.  **Ensure the server is running** (either via Docker or locally).
-2.  **To test the live Render API**, simply run:
+2.  **To test the live Railway API**, simply run:
     ```bash
     python test_api.py
     ```
@@ -125,7 +219,7 @@ A test script `test_api.py` is included to verify the functionality of the API e
 The API is documented using OpenAPI (Swagger UI), which provides an interactive way to explore and test the endpoints.
 
 **API Docs URL**:
--   **Live**: [https://port-tariff-ai.onrender.com/docs](https://port-tariff-ai.onrender.com/docs)
+-   **Live**: [https://porttariffai-production.up.railway.app/docs](https://porttariffai-production.up.railway.app/docs)
 -   **Local**: [http://localhost:8000/docs](http://localhost:8000/docs)
 
 ### Endpoints
@@ -152,9 +246,9 @@ The API is documented using OpenAPI (Swagger UI), which provides an interactive 
     ```json
     {
       "results": {
-        "Port Dues": "ZAR 199,371.35",
         "Light Dues": "ZAR 60,062.04",
-        "VTS Dues": "ZAR 33,345.00"
+        "VTS Dues": "ZAR 33,345.00",
+        "Running of Vessel Dues": "ZAR 3,309.12"
       }
     }
     ```
@@ -165,18 +259,18 @@ The API is documented using OpenAPI (Swagger UI), which provides an interactive 
 
 This command can be run from any terminal (Git Bash, macOS, Linux).
 ```bash
-curl -X POST "https://port-tariff-ai.onrender.com/calculate-tariffs" \
+curl -X POST "https://porttariffai-production.up.railway.app/calculate-tariffs" \
 -H "Content-Type: application/json" \
 -d '{
   "vessel_info": "Port: Durban\nVessel Name: SUDESTADA\nGT: 51,300\nDays Alongside: 3.39\nActivity: Exporting Iron Ore",
-  "requested_dues": ["Port Dues", "Light Dues", "VTS Dues"]
+  "requested_dues": ["Light Dues", "VTS Dues", "Running of Vessel Dues"]
 }'
 ```
 
 #### Windows Command Prompt
 
 ```cmd
-curl -X POST "https://port-tariff-ai.onrender.com/calculate-tariffs" -H "Content-Type: application/json" -d "{\"vessel_info\": \"Port: Durban\\nVessel Name: SUDESTADA\\nGT: 51,300\\nDays Alongside: 3.39\\nActivity: Exporting Iron Ore\", \"requested_dues\": [\"Port Dues\", \"Light Dues\", \"VTS Dues\"]}"
+curl -X POST "https://porttariffai-production.up.railway.app/calculate-tariffs" -H "Content-Type: application/json" -d "{\"vessel_info\": \"Port: Durban\\nVessel Name: SUDESTADA\\nGT: 51,300\\nDays Alongside: 3.39\\nActivity: Exporting Iron Ore\", \"requested_dues\": [\"Light Dues\", \"VTS Dues\", \"Running of Vessel Dues\"]}"
 ```
 
 #### PowerShell
@@ -191,23 +285,24 @@ GT: 51,300
 Days Alongside: 3.39
 Activity: Exporting Iron Ore
 "@
-    requested_dues = @("Port Dues", "Light Dues", "VTS Dues")
+    requested_dues = @("Light Dues", "VTS Dues", "Running of Vessel Dues")
 } | ConvertTo-Json
 
-Invoke-RestMethod -Uri "https://port-tariff-ai.onrender.com/calculate-tariffs" -Method POST -Headers $headers -Body $body
+Invoke-RestMethod -Uri "https://porttariffai-production.up.railway.app/calculate-tariffs" -Method POST -Headers $headers -Body $body
 ```
 
 ---
 
 ## ☁️ Deployment
 
-This application is deployed on **Render** using its Docker container runtime. The deployment is automatically triggered by pushes to the `master` branch of the source GitHub repository.
+This application is deployed on **Railway** using its Docker container runtime. The deployment is automatically triggered by pushes to the `master` branch of the source GitHub repository.
 
--   **Platform**: Render
+-   **Platform**: Railway
 -   **Service Type**: Web Service
 -   **Runtime**: Docker
+-   **Live URL**: [https://porttariffai-production.up.railway.app](https://porttariffai-production.up.railway.app)
 
-**⚠️ Performance Note**: The live API is deployed on Render's free tier. Due to this, the service may experience cold starts and can take up to 1 minute to respond on the first request after periods of inactivity. Use the **local deployment** if needed. 
+**⚠️ Performance Note**: The live API is deployed on Railway's free tier. Due to this, the service may experience cold starts and can take up to 1 minute to respond on the first request after periods of inactivity. Use the **local deployment** if needed. 
 
 
 ---
@@ -241,7 +336,7 @@ curl -X POST "http://127.0.0.1:8000/calculate-tariffs" \
   -H "Content-Type: application/json" \
   -d '{ 
         "vessel_info": "Vessel Name: SUDESTADA\nGT: 51300\nLOA: 229.2\nDays Alongside: 3.39\nPort: Durban",
-        "requested_dues": ["Port Dues", "Light Dues", "Pilotage Dues"]
+        "requested_dues": ["Light Dues", "VTS Dues", "Running of Vessel Dues"]
       }'
 ```
 
@@ -250,9 +345,9 @@ curl -X POST "http://127.0.0.1:8000/calculate-tariffs" \
 ```json
 {
   "results": {
-    "Port Dues": "ZAR 199,549.22",
     "Light Dues": "ZAR 60,062.04",
-    "Pilotage Dues": "ZAR 47,189.94"
+    "VTS Dues": "ZAR 33,345.00",
+    "Running of Vessel Dues": "ZAR 3,309.12"
   }
 }
 ```
