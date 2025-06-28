@@ -1,0 +1,6 @@
+fastapi
+uvicorn[standard]
+python-dotenv
+google-genai  # using the new SDK import style: from google import genai
+pydantic
+requests  # for testing 
