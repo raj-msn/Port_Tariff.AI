@@ -4,7 +4,7 @@ Port_Tariff.AI is an intelligent, AI-powered API that automates the calculation 
 
 The application is containerized with Docker for easy setup and has been successfully deployed to the Render cloud platform, making it a robust and scalable solution.
 
-https://github.com/user-attachments/assets/7ed8cf39-2ee8-4e10-8d5e-a8c779270e59
+https://github.com/user-attachments/assets/512ee13e-1a2a-4936-83a7-909fa28f7258
 
 **Live API URL**: [https://port-tariff-ai.onrender.com/](https://port-tariff-ai.onrender.com/)<br>
 **Live API Docs**: [https://port-tariff-ai.onrender.com/docs](https://port-tariff-ai.onrender.com/docs)
