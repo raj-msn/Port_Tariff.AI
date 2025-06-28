@@ -2,7 +2,7 @@
 
 Port_Tariff.AI is an intelligent, AI-powered API that automates the calculation of South African port tariffs directly from unstructured vessel data. Built with FastAPI and powered by Google's Gemini Pro, it provides a seamless, accurate, and developer-friendly solution for the maritime industry.
 
-The application is containerized with Docker for easy setup and has been successfully deployed to the Render cloud platform, making it a robust and scalable solution.
+The application is containerized with Docker for easy setup and has been successfully deployed to the Railway cloud platform, making it a robust and scalable solution.
 
 https://github.com/user-attachments/assets/c9b8832a-479e-4838-8ac9-9928eb414ba7
 
@@ -16,7 +16,7 @@ https://github.com/user-attachments/assets/c9b8832a-479e-4838-8ac9-9928eb414ba7
 -   **AI-Powered Calculations**: Leverages Google Gemini to interpret unstructured vessel text and calculate tariffs based on rules extracted from the official "Port Tariff.pdf".
 -   **RESTful API**: A clean, modern API built with FastAPI.
 -   **Dockerized Environment**: Fully containerized for consistent, one-command local setup.
--   **Cloud Deployed**: Professionally deployed on Render for public access and scalability.
+-   **Cloud Deployed**: Professionally deployed on Railway for public access and scalability.
 -   **Security-First AI**: LLM responses are filtered to block harmful content if any and ensure only secure, appropriate responses.
 -   **Comprehensive Logging**: Detailed request, response, and calculation logging to `api.log`.
 -   **Automated Testing**: Comes with a `test_api.py` script to validate the deployed or local API.
