@@ -1,4 +1,4 @@
-# Port_Tariff.AI: South-African Port Tariff Calculator
+# Port_Tariff.AI:
 
 Port_Tariff.AI is an intelligent, AI-powered API that automates the calculation of South African port tariffs directly from unstructured vessel data. Built with FastAPI and powered by Google's Gemini Pro, it provides a seamless, accurate, and developer-friendly solution for the maritime industry.
 
@@ -17,10 +17,10 @@ https://github.com/user-attachments/assets/512ee13e-1a2a-4936-83a7-909fa28f7258
 -   **RESTful API**: A clean, modern API built with FastAPI.
 -   **Dockerized Environment**: Fully containerized for consistent, one-command local setup.
 -   **Cloud Deployed**: Professionally deployed on Render for public access and scalability.
+-   **Security-First AI**: LLM responses are filtered to block harmful content if any and ensure only secure, appropriate responses.
 -   **Comprehensive Logging**: Detailed request, response, and calculation logging to `api.log`.
 -   **Automated Testing**: Comes with a `test_api.py` script to validate the deployed or local API.
 -   **Modular Architecture**: Core logic is cleanly separated into the `tariff_engine` for maintainability.
--   **Modular Design**: Core logic is neatly separated into the `tariff_engine` package.
 -   **Dual Interface**: Supports both a modern REST API and a legacy CLI (`main.py`).
 
 ---
@@ -206,9 +206,9 @@ This application is deployed on **Render** using its Docker container runtime. T
 -   **Platform**: Render
 -   **Service Type**: Web Service
 -   **Runtime**: Docker
--   **GitHub Repo**: [raj-msn/Port_Tariff.AI](https://github.com/raj-msn/Port_Tariff.AI)
 
-The deployment process uses the `Dockerfile` in the root of the repository to build and run the container. The `GEMINI_API_KEY` is securely configured as an environment variable in the Render dashboard.
+**⚠️ Performance Note**: The live API is deployed on Render's free tier. Due to this, the service may experience cold starts and can take up to 1 minute to respond on the first request after periods of inactivity. Use the **local deployment** if needed. 
+
 
 ---
 
