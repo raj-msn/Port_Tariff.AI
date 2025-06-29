@@ -221,11 +221,16 @@ The API is documented using OpenAPI (Swagger UI), which provides an interactive 
 -   **Local**: [http://localhost:8000/docs](http://localhost:8000/docs)
 
 ⚠️ **Note**:
+
+- **IMPORTANT:** Provide complete vessel details in the payload (GT, LOA, port, days alongside, etc.) - missing information will be assumed from default values in the rule book, which may not reflect your specific vessel and timeline.
+
 - Due to AI model variability, the API may 
 occasionally return incomplete results - simply retry the 
 request if this occurs.
 
-- Provide complete vessel details in the payload (GT, LOA, port, days alongside, etc.) - missing information will be assumed from default values in the rule book, which may not reflect your specific vessel.
+- Performance: The live API is deployed on Render's free tier. Due to this, the service may experience cold starts and can take up to **1 minute** to respond on the first request after periods of inactivity. Use the local deployment if needed. 
+
+
 
 ### Endpoints
 
@@ -337,9 +342,6 @@ This application is deployed on **Render** using its Docker container runtime. T
 -   **Service Type**: Web Service
 -   **Runtime**: Docker
 -   **Live URL**: [https://port-tariff-ai.onrender.com](https://port-tariff-ai.onrender.com)
-
-**⚠️ Performance Note**: The live API is deployed on Render's free tier. Due to this, the service may experience cold starts and can take up to 1 minute to respond on the first request after periods of inactivity. Use the **local deployment** if needed. 
-
 
 ---
 
