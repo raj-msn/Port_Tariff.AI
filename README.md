@@ -222,13 +222,13 @@ The API is documented using OpenAPI (Swagger UI), which provides an interactive 
 
 ⚠️ **Note**:
 
-- **IMPORTANT:** Provide complete vessel details in the payload (GT, LOA, port, days alongside, etc.) - missing information will be assumed from default values in the rule book, which may not reflect your specific vessel and timeline.
+- IMPORTANT: Provide complete vessel details in the payload (GT, LOA, port, days alongside, etc.) - missing information will be assumed from default values in the rule book, which may not reflect your specific vessel and timeline.
 
 - Due to AI model variability, the API may 
 occasionally return incomplete results - simply retry the 
 request if this occurs.
 
-- Performance: The live API is deployed on Render's free tier. Due to this, the service may experience cold starts and can take up to **1 minute** to respond on the first request after periods of inactivity. Use the local deployment if needed. 
+- Performance: The live API is deployed on Render's free tier. Due to this, the service may experience cold starts and can take up to **2 minute** to respond on the first request after periods of inactivity. Use the local deployment if needed. 
 
 
 
@@ -251,7 +251,7 @@ request if this occurs.
 -   **Description**: Calculates port tariffs from unstructured vessel data.
 -   **Request Body**:
     -   `vessel_info` (string): A multi-line string containing all the vessel details.
-    -   `requested_dues` (list[string], optional): A list of specific dues to calculate. If `null` or omitted, all available tariffs will be calculated.
+    -   `requested_dues` (list[string], optional): A list of specific dues to calculate. **If `null` or omitted, all available tariffs will be calculated.**
 -   **Success Response** (`200 OK`):
     ```json
     {
@@ -265,45 +265,6 @@ request if this occurs.
 
 ### Example API Requests
 
-#### cURL (Command Line)
-
-This command can be run from any terminal (Git Bash, macOS, Linux).
-```bash
-curl -X POST "https://port-tariff-ai.onrender.com/calculate-tariffs" \
--H "Content-Type: application/json" \
--d '{
-  "vessel_info": "Port: Durban\nVessel Name: SUDESTADA\nGT: 51,300\nDays Alongside: 3.39\nActivity: Exporting Iron Ore",
-  "requested_dues": ["Light Dues", "VTS Dues", "Running of Vessel Dues"]
-}'
-```
-
-#### Windows Command Prompt
-
-```cmd
-curl -X POST "https://port-tariff-ai.onrender.com/calculate-tariffs" -H "Content-Type: application/json" -d "{\"vessel_info\": \"Port: Durban\\nVessel Name: SUDESTADA\\nGT: 51,300\\nDays Alongside: 3.39\\nActivity: Exporting Iron Ore\", \"requested_dues\": [\"Light Dues\", \"VTS Dues\", \"Running of Vessel Dues\"]}"
-```
-
-#### PowerShell
-
-```powershell
-$headers = @{ "Content-Type" = "application/json" }
-$body = @{
-    vessel_info = @"
-Port: Durban
-Vessel Name: SUDESTADA
-GT: 51,300
-Days Alongside: 3.39
-Activity: Exporting Iron Ore
-"@
-    requested_dues = @("Light Dues", "VTS Dues", "Running of Vessel Dues")
-} | ConvertTo-Json
-
-Invoke-RestMethod -Uri "https://port-tariff-ai.onrender.com/calculate-tariffs" -Method POST -Headers $headers -Body $body
-```
-
-#### Comprehensive Example with Full Vessel Details
-
-For more accurate calculations, you can provide comprehensive vessel information:
 
 ##### Mac/Linux (cURL)
 ```bash
@@ -320,6 +281,63 @@ curl -X POST "https://port-tariff-ai.onrender.com/calculate-tariffs" \
 curl -X POST "https://port-tariff-ai.onrender.com/calculate-tariffs" -H "Content-Type: application/json" -d "{\"vessel_info\": \"Port: Durban\\n\\nVessel Details:\\n\\nGeneral\\n\\nVessel Name: SUDESTADA\\nBuilt: 2010\\nFlag: MLT - Malta\\nClassification Society: Registro Italiano Navale\\nCall Sign: [Not provided]\\n\\nMain Details\\n\\nLloyds / IMO No.: [Not provided]\\nType: Bulk Carrier\\nDWT: 93,274\\nGT / NT: 51,300 / 31,192\\nLOA (m): 229.2\\nBeam (m): 38\\nMoulded Depth (m): 20.7\\nLBP: 222\\nDrafts SW S / W / T (m): 14.9 / 0 / 0\\nSuez GT / NT: - / 49,069\\n\\nCommunication\\n\\nE-mail: [Not provided]\\nCommercial E-mail: [Not provided]\\n\\nDRY\\n\\nNumber of Holds: 7\\n\\nCargo Details\\n\\nCargo Quantity: 40,000 MT\\nDays Alongside: 3.39 days\\nArrival Time: 15 Nov 2024 10:12\\nDeparture Time: 22 Nov 2024 13:00\\n\\nActivity/Operations\\n\\nActivity: Exporting Iron Ore\\nNumber of Operations: 2\", \"requested_dues\": [\"Port Dues\", \"Light Dues\", \"VTS Dues\"]}"
 ```
 
+##### Windows PowerShell
+```powershell
+$headers = @{ "Content-Type" = "application/json" }
+$body = @{
+    vessel_info = @"
+Port: Durban
+
+Vessel Details:
+
+General
+
+Vessel Name: SUDESTADA
+Built: 2010
+Flag: MLT - Malta
+Classification Society: Registro Italiano Navale
+Call Sign: [Not provided]
+
+Main Details
+
+Lloyds / IMO No.: [Not provided]
+Type: Bulk Carrier
+DWT: 93,274
+GT / NT: 51,300 / 31,192
+LOA (m): 229.2
+Beam (m): 38
+Moulded Depth (m): 20.7
+LBP: 222
+Drafts SW S / W / T (m): 14.9 / 0 / 0
+Suez GT / NT: - / 49,069
+
+Communication
+
+E-mail: [Not provided]
+Commercial E-mail: [Not provided]
+
+DRY
+
+Number of Holds: 7
+
+Cargo Details
+
+Cargo Quantity: 40,000 MT
+Days Alongside: 3.39 days
+Arrival Time: 15 Nov 2024 10:12
+Departure Time: 22 Nov 2024 13:00
+
+Activity/Operations
+
+Activity: Exporting Iron Ore
+Number of Operations: 2
+"@
+    requested_dues = @("Port Dues", "Light Dues", "VTS Dues")
+} | ConvertTo-Json
+
+Invoke-RestMethod -Uri "https://port-tariff-ai.onrender.com/calculate-tariffs" -Method POST -Headers $headers -Body $body
+```
+
 
 **Expected Response:**
 ```json
@@ -331,9 +349,9 @@ curl -X POST "https://port-tariff-ai.onrender.com/calculate-tariffs" -H "Content
   }
 }
 ```
+*The request body if `null` or omitted, all available tariffs will be calculated*
 
 ---
-
 ## ☁️ Deployment
 
 This application is deployed on **Render** using its Docker container runtime. The deployment is automatically triggered by pushes to the `master` branch of the source GitHub repository.
@@ -342,6 +360,8 @@ This application is deployed on **Render** using its Docker container runtime. T
 -   **Service Type**: Web Service
 -   **Runtime**: Docker
 -   **Live URL**: [https://port-tariff-ai.onrender.com](https://port-tariff-ai.onrender.com)
+
+
 
 ---
 
